@@ -35,6 +35,10 @@ Xây dựng hoàn chỉnh một pipeline tự động hóa cho chương trình C
 
 ## 3. Các bước thực hiện
 
+![Trang chủ repository](images/01-repo-home.png)
+
+*Hình 1: Repository public với đầy đủ mã nguồn, workflow và README.*
+
 ### 3.1. Chuẩn bị mã nguồn và bộ kiểm thử
 
 Đã tạo các file theo hướng dẫn:
@@ -77,7 +81,7 @@ File `.github/workflows/ci.yml` được cấu hình:
 
 ![Nội dung workflow CI](images/05-ci-yml.png)
 
-*Hình 1: Workflow `ci.yml` với 3 giai đoạn Lint → Build → Test.*
+*Hình 2: Workflow `ci.yml` với 3 giai đoạn Lint → Build → Test.*
 
 > Ghi chú: dấu ❌ cạnh commit trong ảnh là trạng thái của commit đầu tiên từng làm CI thất bại ở bước lint. Sự cố này đã được xử lý và được trình bày ở mục 4.
 
@@ -112,10 +116,6 @@ Kết quả trên GitHub:
 - **CI** chạy thành công với cả 3 bước màu xanh.
 - **CD** được kích hoạt riêng khi tag `v1.0.0` được đẩy lên và cũng thành công.
 - GitHub Release `v1.0.0` xuất hiện với file nén đính kèm.
-
-![Trang chủ repository](images/01-repo-home.png)
-
-*Hình 2: Repository public với đầy đủ mã nguồn, workflow và README.*
 
 ![Danh sách workflow chạy thành công](images/03-actions-success.png)
 
