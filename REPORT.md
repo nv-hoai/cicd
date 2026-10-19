@@ -1,6 +1,6 @@
 # Báo cáo thực hành: CI/CD với GitHub Actions
 
-**Người thực hiện:** nv-hoai  
+**Người thực hiện:** Nguyễn Văn Hoài - 102230241  
 **Ngày hoàn thành:** 19/10/2026  
 **Repository:** https://github.com/nv-hoai/cicd  
 **Môi trường:** Fedora Linux 44 (WSL), GCC 16.1.1, GNU Make, Cppcheck 2.22.0; runner GitHub Actions `ubuntu-latest`.
