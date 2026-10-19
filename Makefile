@@ -11,8 +11,9 @@ test: build
 
 # 3. Giai đoạn Quét mã tĩnh (Lint) - Bắt lỗi phong cách và bug ngầm
 lint:
-	cppcheck --enable=all --error-exitcode=1 prime_utils.c test_app.c
+	cppcheck --enable=all --suppress=missingIncludeSystem --suppress=checkersReport --error-exitcode=1 prime_utils.c test_app.c
 	# Giải thích: --error-exitcode=1 ép cppcheck phải ném ra lỗi làm dừng sập pipeline nếu phát hiện code xấu.
+	# Hai mục --suppress bỏ qua thông tin môi trường (không tìm thấy header chuẩn, báo cáo checker) vốn không phải lỗi code.
 
 # 4. Dọn dẹp hệ thống
 clean:
