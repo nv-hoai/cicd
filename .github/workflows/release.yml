@@ -1,0 +1,45 @@
+name: Automated Production Release (CD)
+
+# Chỉ kích hoạt đường ống này khi có sự kiện đẩy một Git Tag bắt đầu bằng chữ 'v'
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish-artifacts:
+    runs-on: ubuntu-latest
+    
+    # Cấp quyền cho robot được phép ghi dữ liệu và đăng tải file lên mục Release của Repo
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Tải toàn bộ lịch sử Git để robot tự viết Nhật ký thay đổi (Changelog)
+
+    - name: Install Compilers
+      run: sudo apt-get install -y gcc make
+
+    # Biên dịch bản Production chính thức
+    - name: Build Production Binary
+      run: make build
+
+    # Đóng gói file chạy thành định dạng nén tiêu chuẩn của Linux (.tar.gz)
+    - name: Package Artifact Archive
+      run: |
+        tar -czvf prime-validator-linux-amd64.tar.gz validator
+
+    # SỬ DỤNG ROBOT TỰ ĐỘNG XUẤT BẢN RELEASE
+    - name: Deploy Asset to GitHub Releases
+      uses: softprops/action-gh-release@v2
+      with:
+        # Đính kèm file nén vừa đóng gói lên mạng cho người dùng tải về
+        files: prime-validator-linux-amd64.tar.gz
+        
+        # Bật tính năng tự động quét các Pull Request để tự viết bản tin Release Notes sạch đẹp
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Chìa khóa bảo mật tự động của GitHub cấp cho máy ảo

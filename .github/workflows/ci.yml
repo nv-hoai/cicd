@@ -1,0 +1,32 @@
+name: Continuous Integration (CI) Quality Gate
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    # Cài đặt môi trường bao gồm cả trình biên dịch và công cụ quét tĩnh Cppcheck
+    - name: Install Toolchains (GCC & Cppcheck)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc make cppcheck
+
+    # GIAI ĐOẠN 1: LINT (Quét lỗi tĩnh)
+    - name: Run Stage 1 - Static Code Analysis (Lint)
+      run: make lint
+
+    # GIAI ĐOẠN 2: BUILD (Biên dịch)
+    - name: Run Stage 2 - Compile and Build
+      run: make build
+
+    # GIAI ĐOẠN 3: TEST (Chạy Unit Test)
+    - name: Run Stage 3 - Execute Unit Tests
+      run: make test
