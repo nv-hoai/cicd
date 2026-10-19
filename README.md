@@ -2,6 +2,8 @@
 
 Dự án thực hành thiết lập pipeline **CI/CD** tự động bằng GitHub Actions cho một chương trình C kiểm tra số nguyên tố.
 
+📄 [Báo cáo thực hành chi tiết (REPORT.md)](REPORT.md)
+
 ## Pipeline
 
 | Workflow | Kích hoạt | Nội dung |
